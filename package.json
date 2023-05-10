@@ -4,7 +4,7 @@
   "description": "gateway collect parameter from hivemq broker",
   "main": "gateway.js",
   "scripts": {
-    "start": "nodemon gateway.js",
+    "start": "node gateway.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "vy",
