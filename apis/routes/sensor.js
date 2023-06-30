@@ -1,8 +1,9 @@
-const express = require('express')
-const sensorsHandlers = require('../controllers')
+import express from 'express'
+import sensorsHandlers from '../controllers'
 
 var sensorRouter = express.Router()
+const handlers = new sensorsHandlers()
 
-sensorRouter.route('/').get(sensorsHandlers.get)
+sensorRouter.get("/", handlers.get)
 
 export default sensorRouter

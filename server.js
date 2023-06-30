@@ -1,7 +1,7 @@
-import express from "express"
 import cors from "cors"
+import express from "express"
 import bodyParser from "body-parser"
-const routerSetup = require('./apis/routes')
+import router from './apis/routes'
 const PORT = 8000
 
 const app = express()
@@ -12,7 +12,7 @@ app.use(bodyParser.urlencoded({
     extended: true
   }));
 //Setup router for this app
-routerSetup(app)
+router(app)
 
 app.listen(PORT, () => {
     console.log(`Server listening on port ${PORT}`)

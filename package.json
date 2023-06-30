@@ -2,11 +2,19 @@
   "name": "building",
   "version": "1.0.0",
   "description": "gateway collect parameter from hivemq broker",
-  "main": "gateway.js",
+  "main": "server.js",
+  "type": "module",
   "scripts": {
-    "start": "node gateway.js",
+    "start": "nodemon --experimental-specifier-resolution=node server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "vy",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "mongoose": "^7.3.1",
+    "mqtt": "^4.3.7"
+  }
 }
