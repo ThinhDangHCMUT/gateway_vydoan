@@ -1,0 +1,1 @@
+export const MONGO_URL = "mongodb+srv://building:building@building.1h8pzq3.mongodb.net/?retryWrites=true&w=majority"

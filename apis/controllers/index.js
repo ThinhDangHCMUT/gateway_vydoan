@@ -1,24 +1,33 @@
-import mqtt from 'mqtt'
-const brokerUrl = 'ws://broker.mqttdashboard.com:8000/mqtt'
-const clientId = 'vydoan'
-const topic = 'building_data'
+import { SensorModel } from '../models/sensor_model'
+import dayjs from 'dayjs'
 
-export default class Sensors{
-    get(req,res) {
-        const client = mqtt.connect(brokerUrl, { clientId })
-        client.on('connect', () => {
-            console.log('Connected to HiveMQ broker')
-            client.subscribe(topic)
-        })
-        client.on('message', async (topic, message) => {
-            console.log(`Received message on topic ${topic}: ${message.toString()}`)
-            res.json(
-                {
-                    message: "Success",
-                    data: JSON.parse(message.toString())
-                }
-            )
-        })
+export default class Sensors {
+    postDataWarning(req, res) {
+        if (req.body.name) {
+            console.log(req.body)
+            SensorModel.create(req.body).then((data) => {
+                console.log('---->', data)
+                res.status(201).send(data)
+            })
+        }
     }
+    async getDataWarningByDate(req, res) {
+
+        if (req.query.date) {
+            const startDate = new Date(`${req.query.date}T00:00:00.000Z`)
+            const endDate = new Date(`${req.query.date}T23:59:59.999Z`)
+
+            console.log(endDate)
+            const query = {
+                createdAt: {
+                    $gte: startDate,
+                    $lte: endDate,
+                },
+            };
+            const data = await SensorModel.find(query)
+            res.status(201).send(data)
+        }
+    }
+
     //post(req,res) {}
 }
